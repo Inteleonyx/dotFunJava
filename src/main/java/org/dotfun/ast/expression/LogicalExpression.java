@@ -1,5 +1,6 @@
 package org.dotfun.ast.expression;
 
+import lombok.Getter;
 import org.dotfun.ast.Expression;
 import org.dotfun.ast.visitor.ExpressionVisitor;
 import org.dotfun.lexer.Token;
@@ -9,6 +10,7 @@ import org.dotfun.lexer.Token;
  * @project dotFunJava
  */
 
+@Getter
 public class LogicalExpression implements Expression {
     public final Expression left;
     public final Token op;

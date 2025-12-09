@@ -1,5 +1,7 @@
 package org.dotfun.ast.statement;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.dotfun.ast.Statement;
 import org.dotfun.ast.visitor.StatementVisitor;
 import org.dotfun.lexer.Token;
@@ -13,6 +15,7 @@ import java.util.Optional;
  * @project dotFunJava
  */
 
+@Getter
 public class ConstructorStatement implements Statement {
     public final Token name;
     private final List<AbstractMap.SimpleEntry<String, Optional<String>>> params;
