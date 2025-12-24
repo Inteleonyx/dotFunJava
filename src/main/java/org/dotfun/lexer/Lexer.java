@@ -175,11 +175,12 @@ public class Lexer {
 
             case '$': addToken(TokenType.DOLLAR); break;
 
-            case ' ', '\r', '\t':
-            case '\n': line++;
+            case ' ', '\r', '\t': break;
+            case '\n': line++; break;
 
             case '"', '\'':
                     literal(c);
+                    break;
 
             default:
                 if (isDigit(c)) {
@@ -257,8 +258,8 @@ public class Lexer {
                 continue;
             }
 
-            value.append(c);
             if (c == '\n') line++;
+            value.append(c);
         }
 
         if (isAtEnd()) {
@@ -268,13 +269,11 @@ public class Lexer {
 
         String text = value.toString();
 
-        boolean isChar =
-                text.length() == 1;
-
-        if (isChar)
-            addToken(TokenType.CHAR_LITERAL, text.charAt(0));
-        else
+        if (text.codePointCount(0, text.length()) == 1) {
+            addToken(TokenType.CHAR_LITERAL, text.codePointAt(0));
+        } else {
             addToken(TokenType.STRING_LITERAL, text);
+        }
     }
 
     private String readInterpolatedExpression() {
